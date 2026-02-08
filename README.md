@@ -7,9 +7,9 @@ This is my 9th project. This project will be done in a similar style to my 7th p
 ## Dataset Overview
 The dataset was exported from Kaggle (https://www.kaggle.com/datasets/uciml/adult-census-income). It consists of 32000 rows and 14 columns. In that 14 col,6 columns are numerical columns and the rest are categorical cols, including the output feature.
 ## Pre-Processing Strategy and EDA
-* Found around 2000 rows with missing data. I decided to delete all those rows as I thought 32k is not a small number and losing 2k rows would not make a difference, but increase the prediction than  replacing the NaN values with the mode categories.
-* In the categorical data columns, I have found out that in each column, one label repeats 75% times than the others. To solve this, I have decided to implement Smote Analysis to balence the labels for correct prediction.
-* I have decided to remove 'capital.gain' and 'capital.loss' columns. This is because at least 27-28k columns are 0, and this problem wouldn't be solved using SMOTE analysis. This was my feeling.
+* Approximately 2,000 rows contained missing values, accounting for roughly 6% of the dataset. Since the missingness was primarily in categorical variables and not systematic, I chose to remove these rows rather than perform mode imputation, which could further amplify majority category bias. Given the remaining dataset size (~30k rows), this trade-off was acceptable.
+* The target variable (income >50K) is significantly imbalanced. To address this during model training, I applied SMOTENC after the train-test split to synthetically oversample the minority class while preserving categorical feature integrity. this doesnt apply to target var it applies to all categorical data
+* The capital.gain and capital.loss features were removed due to extreme zero-inflation (over 90% zeros). Since this project focuses on experimenting with neural networks—which are sensitive to sparsity and outliers—I opted to exclude these features to reduce noise and stabilize training. Tree-based models were still evaluated for comparison.
 * Basic EDA of  numerical data.
 | Statistic | age        | fnlwgt        | education.num | hours.per.week |
 |-----------|------------|---------------|---------------|----------------|

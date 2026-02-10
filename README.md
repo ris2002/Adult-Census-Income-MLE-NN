@@ -30,8 +30,43 @@ The dataset was exported from Kaggle (https://www.kaggle.com/datasets/uciml/adul
 *   Education Num (Referencing the Image) Observation: This feature presents a near-ideal box plot. While there is a slight left skew and a few low-end outliers, the distribution is relatively stable.Decision: No changes or transformations will be applied to this data.Reasoning: Since education.num is an ordinal representation of education levels with a narrow range (1–16), it is already well-suited for the model. The few low-education outliers are valid and provide important predictive value.
 
 ### Exploring Categorical Data
-* In the given categorical dataset,['workclass', 'education',' marital.status', 'occupation',' relationship', 'race', 'sex','native.country'], only 'education' and 'occupation' can be considered as ordinal data, the rest all can be considered as nominal data.
-* 
+* In the given categorical dataset,['workclass', 'education',' marital.status', 'occupation',' relationship', 'race', 'sex','native.country'], only 'education' can be considered as ordinal data, the rest all can be considered as nominal data. In context of the data set I am considering 'occupation' as the ordinal dataset. 
+#### Dataset Distribution Summary
+##### Employment & Workclass
+The vast majority of the workforce resides in the private sector.
+Private: 22,286
+Self-employed (Not Inc): 2,499
+Local Government: 2,067
+State Government: 1,279
+Self-employed (Inc): 1,074
+Federal Government: 943
+Without Pay: 14
+##### Education Levels
+Education is highly concentrated at the high school and undergraduate levels.
+HS-grad: 9,840
+Some-college: 6,678
+Bachelors: 5,044
+Masters: 1,627
+Assoc-voc: 1,307
+Doctorate: 375
+Preschool: 45
+##### Marital Status
+Married (Civilian Spouse): 14,065
+Never-married: 9,726
+Divorced: 4,214
+Separated/Widowed: 1,766
+Other: 391
+##### Occupation
+The top occupational categories are nearly tied in frequency:
+Prof-specialty: 4,038
+Craft-repair: 4,030
+Exec-managerial: 3,992
+Adm-clerical: 3,721
+Sales: 3,584
+##### Demographics
+Race: Predominantly White (25,933), followed by Black (2,817) and Asian-Pac-Islander (895).
+Sex: Male (20,380) and Female (9,782).
+We can see in each feature , one categorical label dominates about more than 50%. This might be a problem when used in a basic models like Linear or Logistic regressions, but will not be a problem in ensemble classification techniques and NN only iif encoded properly 
 
 
 ## Selected Model

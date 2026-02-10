@@ -73,6 +73,16 @@ We can see in each feature , one categorical label dominates about more than 50%
 *  For 'Education Num', I will use Standard Scalar as the feature is near perfect.
 *  For Categorical data, I will use OHE to encode nominal features and use OrdinalEncoders to encode ordinal feartures
 *  For the target, I will use Label encoding
+### Train-Test Split and Oversampling Strategy
+
+* The dataset was first cleaned (missing values removed, irrelevant features dropped) and categorical features were integer-encoded to prepare for SMOTENC.
+* The data was split into training and test sets before oversampling.
+* Reason: The test set must remain untouched to provide a realistic, unbiased evaluation of model performance. Splitting first prevents leakage of synthetic samples into the test set.
+* SMOTENC was applied only to the training set to synthetically oversample the minority class while correctly handling categorical features.
+* Reason: Oversampling before splitting would allow synthetic samples to “contaminate” the test set, inflating accuracy and giving a misleading evaluation.
+* After oversampling, numeric features were scaled (RobustScaler for skewed features, StandardScaler for near-ideal features), and categorical features were one-hot encoded or prepared for embeddings as appropriate.
+* Reason: Scaling and encoding are applied after SMOTENC so that the model sees properly formatted data without breaking the synthetic oversampled structure.
+* This pipeline ensures that the model sees a balanced and properly formatted training set, while the test set remains a realistic, unseen representation of the original data.
 
 
 

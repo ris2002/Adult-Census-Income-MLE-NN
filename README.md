@@ -83,6 +83,9 @@ We can see in each feature , one categorical label dominates about more than 50%
 * After oversampling, numeric features were scaled (RobustScaler for skewed features, StandardScaler for near-ideal features), and categorical features were one-hot encoded or prepared for embeddings as appropriate.
 * Reason: Scaling and encoding are applied after SMOTENC so that the model sees properly formatted data without breaking the synthetic oversampled structure.
 * This pipeline ensures that the model sees a balanced and properly formatted training set, while the test set remains a realistic, unseen representation of the original data.
+## Post EDA, Pre-Training Analysis
+* Size of x_train is (40816, 75)
+* Size of y_train is (40816,)
 
 
 

@@ -31,7 +31,7 @@ The dataset was exported from Kaggle (https://www.kaggle.com/datasets/uciml/adul
 *   While feature correlation analysis was explored, it was not used for feature elimination. Both neural networks and ensemble-based classifiers are capable of handling correlated inputs and learning nonlinear relationships. Therefore, emphasis was placed on distribution analysis, encoding strategy, and handling skewed and zero-inflated features.
 
 ### Exploring Categorical Data
-* In the given categorical dataset,['workclass', 'education',' marital.status', 'occupation',' relationship', 'race', 'sex','native.country'], only 'education' can be considered as ordinal data, the rest all can be considered as nominal data. In context of the data set I am considering 'occupation' as the ordinal dataset. 
+* In the given categorical dataset,['workclass', 'education',' marital.status', 'occupation',' relationship', 'race', 'sex','native.country'], only 'education' can be considered as ordinal data, the rest all can be considered as nominal data. Although occupation does not have a universally agreed-upon ordinal structure, it was intentionally treated as an ordinal feature for experimental purposes. 
 #### Dataset Distribution Summary
 ##### Employment & Workclass
 The vast majority of the workforce resides in the private sector.
@@ -69,13 +69,18 @@ Race: Predominantly White (25,933), followed by Black (2,817) and Asian-Pac-Isla
 Sex: Male (20,380) and Female (9,782).
 We can see in each feature , one categorical label dominates about more than 50%. This might be a problem when used in a basic models like Linear or Logistic regressions, but will not be a problem in ensemble classification techniques and NN only iif encoded properly 
 ### Scaling and Encoding
+* For scaling numerical features, I will use Robust Scalar to scale all numerical features except the 'Education Num' feature. Usage of Robust Scalr is used because most of the numerical features except 'Education Num' feature, have outliers.
+*  For 'Education Num', I will use Standard Scalar as the feature is near perfect.
+*  For Categorical data, I will use OHE to encode nominal features and use OrdinalEncoders to encode ordinal feartures
+*  For the target, I will use Label encoding
+
 
 
 ## Selected Model
 * Custom NN
 * Random Forest 
 * ADABOOST
-* Graadient Boosting
+* Gradient Boosting
 * XG Boost
 ## Model Reasoning and hypothesis
 

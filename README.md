@@ -28,6 +28,7 @@ The dataset was exported from Kaggle (https://www.kaggle.com/datasets/uciml/adul
 *  Capital Gain & Capital Loss Observation: These features are extremely right-skewed and heavily "zero-inflated," with the vast majority of data points concentrated at 0 and a long tail of extreme outliers.Decision: Apply Log Transformation (\(\log (x+1)\)) to compress the range and reduce skewness. Additionally, create two new binary features representing the presence of a gain or loss (1 if \(>0\), else 0).Reasoning: This "dual-feature" approach allows the NN to distinguish between the existence of investment income and its magnitude, while protecting the model from unstable gradients caused by extreme values. 
 *  Hours per Week Observation: The distribution shows low skewness, with the median centered near 40 hours. However, there are numerous outliers on both the high and low ends of the spectrum.Decision: No Log Transformation is required due to low skewness. However, outlier handling is mandatory.Reasoning: The IQR method will be used to identify and manage these outliers. This ensures that extreme work schedules (e.g., 99 hours/week) do not disproportionately bias the model's weight updates.
 *   Education Num (Referencing the Image) Observation: This feature presents a near-ideal box plot. While there is a slight left skew and a few low-end outliers, the distribution is relatively stable.Decision: No changes or transformations will be applied to this data.Reasoning: Since education.num is an ordinal representation of education levels with a narrow range (1–16), it is already well-suited for the model. The few low-education outliers are valid and provide important predictive value.
+*   While feature correlation analysis was explored, it was not used for feature elimination. Both neural networks and ensemble-based classifiers are capable of handling correlated inputs and learning nonlinear relationships. Therefore, emphasis was placed on distribution analysis, encoding strategy, and handling skewed and zero-inflated features.
 
 ### Exploring Categorical Data
 * In the given categorical dataset,['workclass', 'education',' marital.status', 'occupation',' relationship', 'race', 'sex','native.country'], only 'education' can be considered as ordinal data, the rest all can be considered as nominal data. In context of the data set I am considering 'occupation' as the ordinal dataset. 
@@ -67,6 +68,7 @@ Sales: 3,584
 Race: Predominantly White (25,933), followed by Black (2,817) and Asian-Pac-Islander (895).
 Sex: Male (20,380) and Female (9,782).
 We can see in each feature , one categorical label dominates about more than 50%. This might be a problem when used in a basic models like Linear or Logistic regressions, but will not be a problem in ensemble classification techniques and NN only iif encoded properly 
+### Scaling and Encoding
 
 
 ## Selected Model

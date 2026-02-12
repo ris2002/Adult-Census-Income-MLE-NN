@@ -1,5 +1,5 @@
 # Adult-Census-Income-MLE-NN
-This is my 9th project. This project will be done in a similar style to my 7th project, except it will not be end-to-end like it. I am only going to involve NN and ensemble techniques, as I am learning those techniques to apply them to regression tasks.
+This is my 9th project. This project will be done in a similar style to my 7th project (https://github.com/ris2002/Diabetes_Prediction-MLE), except it will not be end-to-end like it. I am only going to involve NN and ensemble techniques, as I am learning those techniques to apply them to regression tasks.
 ## Problem Analysis
 * Type-Classification
 * Business Goal - The business goal is to identify individuals who are likely to earn more than $50,000 annually using demographic and employment-related information.
@@ -97,5 +97,22 @@ We can see in each feature , one categorical label dominates about more than 50%
 * Gradient Boosting
 * XG Boost
 ## Model Reasoning and hypothesis
+### Neural Network Algorithm
+### Boosting Algorithms
+* Boosting algorithms are one kind of ensemble technique wherein a strong model is made up of several weak models instead of building a strong model from the get-go.This results in the model learning non-linear data and can be applied to both Classification and Regression Problems. Here, the weak model refers to a weak Decision Tree or  Logistic Regression model
+#### ADABoost
+Model Overview-
+* It uses only  DT, specifically shallow DT known as stump, as its weak modelor Basse Learner.
+* The working of this model is as follows-
+     * In a dataset, it first assigns equal but random weights to each record.
+     * If there are n features, it creates n stumps and selects the stump with less entropy and trains the data on it.
+     * After training data on that stump, it finds the total errors and performance of that stump.
+     * Why find the total errors and performance of that stump? That is because, in all boosting techniques, we need to pass incorrect records or the margin of error to the next base learner so that the next model puts more emphasis on resolving that.
+     * In Ada-Boost, we increase the weights of those incorrectly classified records so that the next base learner emphasises  learning from the mistakes of the previous model to predict correctly.
+* One disadvantage is that Adaboost is slower to train and sensitive to noise.
+* Reason- This is a simple mechanism of a boosting algorithm, and I want to take it as a baseline reference in terms of accuracy and speed of prediction. 
+
+* HYPOTHESIS
+### Bagging Algorithms
 
 ## Model Hyperparameters tuning

@@ -163,3 +163,10 @@ Model Overview-
 * Null-Hypothesis- Random Forest does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
 
 ## Model Hyperparameters tuning
+### Neural Networks
+* Test-1
+   * epoch-1000, loss_func-CrossEntropyLoss, Optimizerr-SGD,LR-0.01,Acivation Func-Relu,Neurrons-128+2,2 layers
+   * Reason for selecting these values and a shallow NN and no dropout or Batch Normalisation is to just get a baseline to further improve accuracy.
+   * I have taken large neurons at first to serve as a neutral starting point
+   * Training accuracy-0.8132 Testing Accuracy-0.7885,Recall for Class 1 (>50K) is 0.81, Recall for Class 0 (<=50K) is 0.78
+   * My Reason for high accuracy during the first neutral test is tha I think the Adult data set is too simple for NN to capture its patterns

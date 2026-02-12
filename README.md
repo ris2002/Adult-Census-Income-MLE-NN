@@ -114,7 +114,7 @@ Model Overview-
 * One disadvantage is that Adaboost is slower to train and sensitive to noise.
 * Reason- This is a simple mechanism of a boosting algorithm, and I want to take it as a baseline reference in terms of accuracy and speed of prediction. 
 ##### Null Hypothesis
-* Null-Hypothesis- ADABoost does not significantly outperform a random or majority-class baseline in terms of recall for the adult census dataset.
+* Null-Hypothesis- ADABoost does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
 
 #### Gradient Boost
 Model Overview-
@@ -126,7 +126,7 @@ Model Overview-
 * Some disadvantages is that Gradient Boost is highly sensitive to overfitting, class imbalance, outliers and complex hyperparameter tuning.
 * Reason- This is a much more complex mechanism compared to ADABoost and is little similar to the passing of gradients in NN during backpropagation, for this data, I have done EDA to remove the known outliers and handle class imbalence and I wnt check what happens when this kind of ML algorithm with processes similar to NN iss applied to my dataset    .
 ##### Null Hypothesis
-* Null-Hypothesis- Gradient Boost does not significantly outperform a random or majority-class baseline in terms of recall for the adult census dataset.
+* Null-Hypothesis- Gradient Boosting does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
 
 #### XGBoost
 Model Overview-
@@ -140,9 +140,23 @@ Model Overview-
 * One disadvantage is that Adaboost is slower to train and sensitive to noise.
 * Reason- This is a simple mechanism of a boosting algorithm, and I want to take it as a baseline reference in terms of accuracy and speed of prediction. 
 ##### Null Hypothesis
-* Null-Hypothesis- XGBoost does not significantly outperform a random or majority-class baseline in terms of recall forthe adult census dataset.
+* Null-Hypothesis- XGBoosting does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
 
 ------------------------------------------------------------------------------------------------------------------------
 ### Bagging Algorithms
+* This technique is also known as bootstrap aggregation. What happens here is we have multiple  base learners(high-variance models) which are given to train on the randomly subsetted data first, and they together come to a decision to predict results. This is done to reduce overfitting to improve the stability and accuracy of the models.
+#### Random Forest
+
+Model Overview-
+* It uses only  DT, as its  Base Learner.
+* DT is one of the highly variant ML models. The main goal of the Random Forest/Bagging Technique is to convert this high-variance DT into low variance
+* The working of this model is as follows-
+     * Firstly bootstrapping process takes place, basically row sampling, feature sampling with replacement is given to each DT to train on.
+     * By doing this, each DT will become an expert wrt to each subset of the dataset.
+     * Internally, it produces an output, and the majority prediction is given as the final output (aggregation). By the voting process, we convert the highly variant DT into low variance.
+* Some disadvantages: High Resource Consumption (Memory & Storage), Slow Prediction Speed (Inference).
+* Reason- This is an even simpler mechanism compared to the boosting algorithms mentioned above. My intuition is that sometimes simplicity triumphs complexity.
+##### Null Hypothesis
+* Null-Hypothesis- Random Forest does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
 
 ## Model Hyperparameters tuning

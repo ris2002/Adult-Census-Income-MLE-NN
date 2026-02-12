@@ -98,6 +98,17 @@ We can see in each feature , one categorical label dominates about more than 50%
 * XG Boost
 ## Model Reasoning and hypothesis
 ### Neural Network Algorithm
+* Neural Networks are nothing but mathematics to predict outputs on a dataset. My intuition is that using forward and backward propagations, it tries to train its weights and biases in such a way that it maps similar to the  data-set in a n-diamentional graph.
+* The working of this technique is as follows-
+  * Forward Pass (only 1 neuron,1 epoch)
+     * Firstly, it assigns each neuron random weights and biases, here weights represent how important a particular input to a neuron is, and bias is like a personality trait.
+     * It computes equation z=sum(w*x)+b and passes this function through an activation function to introduce some non-linearity to it  ,then it passes it through an output activation function to compute and then through a loss function to compute its losss
+  * Backward pass
+     * After it computes the loss, it finds the gradients wrt to the weights and biases and passes them back through  the layer. Using the optimiser, it computes the weights and biases from the final gradients and again repeats the  forward pass
+* Disadvantages- Requires a lot of experimentation and research to land the correct model
+* Reason- I am currently learning NN and I want to compare how it compares with other ML models wrt to this classification dataset. 
+##### Null Hypothesis
+* Null-Hypothesis- NN  performs similarly or better to the other ML models on the Adult Census dataset.
 ------------------------------------------------------------------------------------------------------------------------
 ### Boosting Algorithms
 * Boosting algorithms are one kind of ensemble technique wherein a strong model is made up of several weak models instead of building a strong model from the get-go.This results in the model learning non-linear data and can be applied to both Classification and Regression Problems. Here, the weak model refers to a weak Decision Tree or  Logistic Regression model.
@@ -129,16 +140,8 @@ Model Overview-
 * Null-Hypothesis- Gradient Boosting does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
 
 #### XGBoost
-Model Overview-
-* It uses only  DT, specifically shallow DT known as stump, as its weak modelor Basse Learner.
-* The working of this model is as follows-
-     * In a dataset, it first assigns equal but uniform weights to each record.
-     * If there are n features, it creates n stumps and selects the stump with less entropy (chks if the split is pure or near pure) and trains the data on it.
-     * After training data on that stump, it finds the total errors and performance of that stump.
-     * Why find the total errors and performance of that stump? That is because, in all boosting techniques, we need to pass incorrect records or the margin of error to the next base learner so that the next model puts more emphasis on resolving that.
-     * In Ada-Boost, we increase the weights of those incorrectly classified records so that the next base learner emphasises  learning from the mistakes of the previous model to predict correctly.
-* One disadvantage is that Adaboost is slower to train and sensitive to noise.
-* Reason- This is a simple mechanism of a boosting algorithm, and I want to take it as a baseline reference in terms of accuracy and speed of prediction. 
+*XGBoost (eXtreme Gradient Boosting) is an optimised and regularised version of the standard Gradient Boosting Machine (GBM).
+* Reason- This is an advanced version of Gradient Boosting, and I want to chk how it compares to the Gradient Boosting Mechanism. 
 ##### Null Hypothesis
 * Null-Hypothesis- XGBoosting does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
 

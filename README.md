@@ -11,6 +11,7 @@ The dataset was exported from Kaggle (https://www.kaggle.com/datasets/uciml/adul
 * The target variable (income >50K) is significantly imbalanced. To address this during model training, I applied SMOTENC after the train-test split to synthetically oversample the minority class while preserving categorical feature integrity. this doesnt apply to target var it applies to all categorical data
 * The capital.gain and capital.loss features were identified as zero-inflated, with a large majority of observations containing zero values. While initially considered for removal due to sparsity concerns, these features were retained after NN-oriented analysis. Rather than dropping them, the following transformations are planned: Binary indicator features capturing the presence of non-zero values, Log-transformation (log1p) to compress extreme magnitudes, Standard scaling to ensure stable gradient behaviour. This approach allows the neural network to learn rare but highly informative signals without introducing bias.
 * column fnlwgt is analysed as a useless feature, as this is for a group of individuals, not for a single individual, so it was removed.
+* PCA is not required as the dataset is low diamention and mixed data.
 * Basic EDA of  numerical data.
 | Statistic | age        | fnlwgt        | education.num | hours.per.week |
 |-----------|------------|---------------|---------------|----------------|

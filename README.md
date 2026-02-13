@@ -102,30 +102,30 @@ We can see in each feature , one categorical label dominates about more than 50%
 * The working of this technique is as follows-
   * Forward Pass (only 1 neuron,1 epoch)
      * Firstly, it assigns each neuron random weights and biases, here weights represent how important a particular input to a neuron is, and bias is like a personality trait.
-     * It computes equation z=sum(w*x)+b and passes this function through an activation function to introduce some non-linearity to it  ,then it passes it through an output activation function to compute and then through a loss function to compute its losss
+     * It computes equation z=sum(w*x)+b and passes this function through an activation function to introduce some non-linearity to it , then it passes it through an output activation function to compute and then through a loss function to compute its losss
   * Backward pass
      * After it computes the loss, it finds the gradients wrt to the weights and biases and passes them back through  the layer. Using the optimiser, it computes the weights and biases from the final gradients and again repeats the  forward pass
 * Disadvantages- Requires a lot of experimentation and research to land the correct model
-* Reason- I am currently learning NN and I want to compare how it compares with other ML models wrt to this classification dataset. 
+* Reason- I am currently learning NN, and I want to compare how it compares with other ML models wrt to this classification dataset. 
 ##### Null Hypothesis
-* Null-Hypothesis- NN  performs similarly or better to the other ML models on the Adult Census dataset.
+* Null-Hypothesis- NN  performs similarly or better than the other ML models and gives equal F1 scores and an overall minimum of 70% F1 score on 2 classes on the Adult Census dataset.
 ------------------------------------------------------------------------------------------------------------------------
 ### Boosting Algorithms
-* Boosting algorithms are one kind of ensemble technique wherein a strong model is made up of several weak models instead of building a strong model from the get-go.This results in the model learning non-linear data and can be applied to both Classification and Regression Problems. Here, the weak model refers to a weak Decision Tree or  Logistic Regression model.
-* All Boosting algorithms are sequential in nature.
+* Boosting algorithms are one kind of ensemble technique wherein a strong model is made up of several weak models instead of building a strong model from the get-go. This results in the model learning non-linear data and can be applied to both Classification and Regression Problems. Here, the weak model refers to a weak Decision Tree or  Logistic Regression model.
+* All boosting algorithms are sequential in nature.
 #### ADABoost
 Model Overview-
 * It uses only  DT, specifically shallow DT known as stump, as its weak modelor Base Learner.
 * The working of this model is as follows-
      * In a dataset, it first assigns equal but uniform weights to each record.
-     * If there are n features, it creates n stumps and selects the stump with less entropy (chks if the split is pure or near pure) and trains the data on it.
+     * If there are n features, it creates n stumps and selects the stump with less entropy (checks if the split is pure or near pure) and trains the data on it.
      * After training data on that stump, it finds the total errors and performance of that stump.
      * Why find the total errors and performance of that stump? That is because, in all boosting techniques, we need to pass incorrect records or the margin of error to the next base learner so that the next model puts more emphasis on resolving that.
      * In Ada-Boost, we increase the weights of those incorrectly classified records so that the next base learner emphasises  learning from the mistakes of the previous model to predict correctly.
 * One disadvantage is that Adaboost is slower to train and sensitive to noise.
 * Reason- This is a simple mechanism of a boosting algorithm, and I want to take it as a baseline reference in terms of accuracy and speed of prediction. 
 ##### Null Hypothesis
-* Null-Hypothesis- ADABoost does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
+* Null-Hypothesis- ADABoost gives an F1 score minimum of 70% and performs equally on both classes on the Adult Census dataset.
 
 #### Gradient Boost
 Model Overview-
@@ -137,13 +137,13 @@ Model Overview-
 * Some disadvantages is that Gradient Boost is highly sensitive to overfitting, class imbalance, outliers and complex hyperparameter tuning.
 * Reason- This is a much more complex mechanism compared to ADABoost and is little similar to the passing of gradients in NN during backpropagation, for this data, I have done EDA to remove the known outliers and handle class imbalence and I wnt check what happens when this kind of ML algorithm with processes similar to NN iss applied to my dataset    .
 ##### Null Hypothesis
-* Null-Hypothesis- Gradient Boosting does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
+* Null-Hypothesis- Gradient Boosting gives an F1 score minimum of 70% and performs equally on both classes on the Adult Census dataset.
 
 #### XGBoost
 *XGBoost (eXtreme Gradient Boosting) is an optimised and regularised version of the standard Gradient Boosting Machine (GBM).
 * Reason- This is an advanced version of Gradient Boosting, and I want to chk how it compares to the Gradient Boosting Mechanism. 
 ##### Null Hypothesis
-* Null-Hypothesis- XGBoosting does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
+* Null-Hypothesis- XGBoosting gives an F1 score minimum of 70% and performs equally on both classes on the Adult Census dataset.
 
 ------------------------------------------------------------------------------------------------------------------------
 ### Bagging Algorithms
@@ -160,13 +160,36 @@ Model Overview-
 * Some disadvantages: High Resource Consumption (Memory & Storage), Slow Prediction Speed (Inference).
 * Reason- This is an even simpler mechanism compared to the boosting algorithms mentioned above. My intuition is that sometimes simplicity triumphs complexity.
 ##### Null Hypothesis
-* Null-Hypothesis- Random Forest does not outperform a majority-class baseline in terms of minority-class recall on the Adult Census dataset.
+* Null-Hypothesis- Random Forest gives an F1 score minimum of 70% and performs equally on both classes on the Adult Census dataset.
+## Evaluation Metrics Strategy 
+* In a confusion matrix, we have TP,FN,FP,TN based on 2 classes, True and False.
+* True Positive means in the true class, the labels were correctly detected as True.
+* False Negative means in the true class, the labels were wrongly detected as False.
+* True Negatives means in the false class, the labels were correctly detected as False.
+* False Positives means in the false class, the labels were wrongly detected as True.
+* Recall=TP/TP+FN, recall answers the question - "Out of all real positives, how many were detected correctly".
+* Precision=TP/TP+FP means that out of the values detected as true, how many were correctly flagged.
+* Higher Precision means the model can distinguish the true values correctly.
+* Higher Recall
+* F1 score is nothing but the harmonic mean of precision and recall.
+* The harmonic mean: Punishes imbalance, Becomes low if either precision or recall is low ,Forces both to be reasonably high
+* Hence, I will be evaluating the F1 scores only
 
 ## Model Hyperparameters tuning
 ### Neural Networks
 * Test-1
    * epoch-1000, loss_func-CrossEntropyLoss, Optimizerr-SGD,LR-0.01,Acivation Func-Relu,Neurrons-128+2,2 layers
-   * Reason for selecting these values and a shallow NN and no dropout or Batch Normalisation is to just get a baseline to further improve accuracy.
+   * Reason for selecting these values and a shallow NN and no dropout or Batch Normalisation is just to get a baseline to improve accuracy further.
    * I have taken large neurons at first to serve as a neutral starting point and I felt 32, or 64 would train much as I have around 40816 records after SMOTE.
-   * Training accuracy-0.8132 Testing Accuracy-0.7885,Recall for Class 1 (>50K) is 0.81, Recall for Class 0 (<=50K) is 0.78
-   * My Reason for high accuracy during the first neutral test is tha I think the Adult data set is too simple for NN to capture its patterns 
+   * Class 0
+        * Precision: 0.92 → When the model predicts 0, it’s correct 92% of the time (very good).
+        * Recall: 0.78 → It correctly finds 78% of all actual 0 cases (decent).
+        * F1-score: 0.85 → Strong overall performance for this class.
+   * Class 1
+        * Precision: 0.56 → When the model predicts 1, it’s correct only 56% of the time (moderate/low).
+        * Recall: 0.81 → It catches 81% of actual 1 cases (good).
+        * F1-score: 0.66 → Moderate performance.
+   *  I have run the same model, but with a threshold of 0.7 to increase the precision of class 1, but I have ended up with similar results.
+   *  With a total f1 score of 75%, it is a good benchmark but if it has come to individual classes it iis not good.
+   *  The reason for the good total F1 score might be attributed to the usage of high neons in the hidden layer.
+   *  The observation from the loss curve and the accuracy curve is it is converging at around 200 epochs, which implies that model has stopped learning the patterns so fastlty , maybe with the same epoch and more layers, we can make the model learn patterns a little more slowly so that it can give a good F1 score for class 1. 

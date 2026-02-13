@@ -210,7 +210,7 @@ Model Overview-
    *  With a total f1 score of 65.2%, we can see it has decreased, but if you notice class wise there there has been some improvement in the department of precision in class 1 annd recall in class 0.
    *   There has been little decrease in the value of precision in class 0 and a significant decrease in  recall in class 1.  
    *  The reason for the good precision in class 1 and recall in class 0 may be attributed to the batch size  and threshold. Threshold also played a role in crashing the recall value in class 1.
-   *  See due to mini-baatching what happened was it was able to update weights  40186/200(batch_size) times due to whic hthe precison for class 1 has increased suddenly.
+   *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. This shifted the model’s output probabilities, making it more conservative predicting class 1. As a result, class 1 precision increased, but recall dropped significantly.
    *  Due to the  threshold at 0.7, what is happening is that the model is selecting probabilities greater than 0.7 this reduces the recall for class 1. The recall for class 0 is 0.98 that implies that the model is 
    * <img width="1366" height="1144" alt="image" src="https://github.com/user-attachments/assets/8c86a81b-94df-4130-9f3e-44012d2bf22e" />
 

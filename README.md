@@ -233,5 +233,21 @@ Model Overview-
    *   We can see in individual class results, it matches the the test-1 This might be because of the usage of dropout layer which drops the neurons randomly duringg each epoch of traininng so that each neuron would update itss weights indepently and no neiron woruld be dependednt on the other.
    * <img width="1316" height="1068" alt="image" src="https://github.com/user-attachments/assets/27512b13-79b8-4e75-910d-5f713d9ca1bd" />
    *  <img width="1326" height="1062" alt="image" src="https://github.com/user-attachments/assets/ac35568a-4253-4947-a04f-d36db40f819a" />
-   * The accuraacy and loss graphs are relativly the same as the tests before. And the main improvement is to test with Batch-Normalisation Layer and leaving the rest of params the same.
+   * The accuraacy  graph is relativly the same as the tests before. And the main improvement is to test with Batch-Normalisation Layer and leaving the rest of params the same.
+   * In the loss graphs there are frequent ups and downs because Vanilla SGD is very twitchy; it reacts instantly to every batch, causing the zig-zag you see.
    * This test is more efficent than the test-1 because in test-1 thhreshold-0.5, no mini batching and no dropuot layer
+ * Test-4
+   * Same Hyperparams as before but with 1 dropout layer
+   * Reason for not changing the hyperparameters is that I wanted to test with a Batch norm layer.
+  
+   * Class 0
+        * Precision: 0.93 
+        * Recall: 0.80 
+        * F1-score: 0.86
+   * Class 1
+        * Precision: 0.58
+        * Recall: 0.82
+        * F1-score: 0.68
+   *  The results are similar to the previous test, hence I will take this as the baseline layer and build to top of it.
+   *  The graphs are similar but in the accuracy curve the graph conludes by 50 epoch, thois might be due to batch norm which stablaised the gradients faster.
+   *  For the next test increase the layer test with other optimiers and more decreased LR

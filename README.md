@@ -192,7 +192,7 @@ Model Overview-
    *  I have run the same model, but with a threshold of 0.7 to increase the precision of class 1, but I have ended up with similar results.
    *  With a total f1 score of 75%, it is a good benchmark but if it has come to individual classes it iis not good.
    *  The reason for the good total F1 score might be attributed to the usage of high neons in the hidden layer.
-   *  The observation from the loss curve and the accuracy curve is it is converging at around 200 epochs, which implies that model has stopped learning the patterns so fastlty , maybe with the same epoch and more layers, we can make the model learn patterns a little more slowly so that it can give a good F1 score for class 1.
+   *  The observation from the loss curve and the accuracy curve is it is converging at around 200 epochs, which implies that model has stopped learning the patterns so fastlty, maybe with the same epoch little slower LR,optimer ad batch size, we can make the model learn patterns a little more slowly so that it can give a good F1 score for class 1.
    *  
 * Test-2
    * epoch-1000, loss_func-CrossEntropyLoss, Optimizerr-SGD,LR-0.01,Acivation Func-Relu,Neurrons-128+2,2 layers (same as 1st test) included batch size=200, threshold=0.7
@@ -211,9 +211,27 @@ Model Overview-
    *   There has been little decrease in the value of precision in class 0 and a significant decrease in  recall in class 1.  
    *  The reason for the good precision in class 1 and recall in class 0 may be attributed to the batch size  and threshold. Threshold also played a role in crashing the recall value in class 1.
    *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. This shifted the model’s output probabilities, making it more conservative predicting class 1. As a result, class 1 precision increased, but recall dropped significantly.
-   *  Due to the  threshold at 0.7, what is happening is that the model is selecting probabilities greater than 0.7 this reduces the recall for class 1. The recall for class 0 is 0.98 that implies that the model is 
+   *  Due to the  threshold at 0.7, what is happening is that the model is selecting probabilities greater than 0.7 this reduces the recall for class     1. The recall for class 0 is 0.98 that implies that the model is 
    * <img width="1366" height="1144" alt="image" src="https://github.com/user-attachments/assets/8c86a81b-94df-4130-9f3e-44012d2bf22e" />
 
    *  <img width="1342" height="1018" alt="image" src="https://github.com/user-attachments/assets/e295f5cd-51da-4893-9601-23ccf400e87f" />
-   * From the above pictures, we can see that the accuracy and the loss curves are convering quicklin in the epoch range of 0-100. My intuition is model has somewhat stopped leaning after the curve has stabilised and if the layers are more the leranig rate is less and with the adding og dropout and batch normalisation there is a posibility of accepting null hypothesis.
-
+   * From the above pictures, we can see that the accuracy and the loss curves are convering quicklin in the epoch range of 0-100. My intuition is model has somewhat stopped leaning after the curve has stabilised and if  the leranig rate is less and with the adding og dropout and batch normalisation dropping the batch size  there is a posibility of accepting null hypothesis.
+* Test-3
+   * epoch-1000, loss_func-CrossEntropyLoss, Optimizerr-SGD,Acivation Func-Relu,Neurrons-128+2,2 layers,batch size=200, threshold=0.7 (same as 1st and 2nd test) included dropout layer(0.25%)and changed LR to LR-0.001
+   * Reason for not changing the hyperparameters is that I wanted to test with a dropout layer and reduced LR.
+  
+   * Class 0
+        * Precision: 0.93
+        * Recall: 0.79
+        * F1-score: 0.85  
+   * Class 1
+        * Precision: 0.57
+        * Recall: 0.83
+        * F1-score: 0.68
+   *  I have run the same model, but with a dropout layer and reduced LR.
+   *  With a total f1 score of 76.5%, we can see it has increased overall, the class wise metrics are similar to the first test.
+   *   We can see in individual class results, it matches the the test-1 This might be because of the usage of dropout layer which drops the neurons randomly duringg each epoch of traininng so that each neuron would update itss weights indepently and no neiron woruld be dependednt on the other.
+   * <img width="1316" height="1068" alt="image" src="https://github.com/user-attachments/assets/27512b13-79b8-4e75-910d-5f713d9ca1bd" />
+   *  <img width="1326" height="1062" alt="image" src="https://github.com/user-attachments/assets/ac35568a-4253-4947-a04f-d36db40f819a" />
+   * The accuraacy and loss graphs are relativly the same as the tests before. And the main improvement is to test with Batch-Normalisation Layer and leaving the rest of params the same.
+   * This test is more efficent than the test-1 because in test-1 thhreshold-0.5, no mini batching and no dropuot layer

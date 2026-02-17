@@ -212,9 +212,9 @@ Model Overview-
    *  The reason for the good precision in class 1 and recall in class 0 may be attributed to the batch size  and threshold. Threshold also played a role in crashing the recall value in class 1.
    *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. Mini-batching provides a noisier but computationally efficient approximation of the true gradient, which helps convergence and scalability but does not fundamentally change what the model can learn. It is only used to converge, scale and generalize it efficiently
    *  Due to the  threshold at 0.7, what is happening is that the model is selecting probabilities greater than 0.7 this reduces the recall for class   1. The recall for class 0 is 0.98, which implies that the model can correctly predict the true values of class 0. All the change in behaviour of class 1 is attributed to threshold effect only. 
-   * <img width="1366" height="1144" alt="image" src="https://github.com/user-attachments/assets/8c86a81b-94df-4130-9f3e-44012d2bf22e" />
+   * <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/8c86a81b-94df-4130-9f3e-44012d2bf22e" />
 
-   *  <img width="1342" height="1018" alt="image" src="https://github.com/user-attachments/assets/e295f5cd-51da-4893-9601-23ccf400e87f" />
+   *  <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/e295f5cd-51da-4893-9601-23ccf400e87f" />
    * From the above pictures, we can see that the accuracy and the loss curves are convering quicklin in the epoch range of 0-100. My intuition is model has somewhat stopped leaning  aggresivly after the curve has stabilised and if  the leranig rate is less and with the adding og dropout and batch normalisation dropping the batch size  there is a posibility of accepting null hypothesis.
     
 * Test-3
@@ -232,8 +232,8 @@ Model Overview-
    *  I have run the same model, but with a dropout layer and reduced LR.
    *  With a total f1 score of 76.5%, we can see it has increased overall, the class wise metrics are similar to the first test.
    *   We can see in individual class results, it matches the the test-1 This might be because of the usage of dropout layer which drops the neurons randomly duringg each epoch of traininng so that each neuron would update itss weights indepently and no neiron woruld be dependednt on the other.
-   * <img width="1316" height="1068" alt="image" src="https://github.com/user-attachments/assets/27512b13-79b8-4e75-910d-5f713d9ca1bd" />
-   *  <img width="1326" height="1062" alt="image" src="https://github.com/user-attachments/assets/ac35568a-4253-4947-a04f-d36db40f819a" />
+   * <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/27512b13-79b8-4e75-910d-5f713d9ca1bd" />
+   *  <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/ac35568a-4253-4947-a04f-d36db40f819a" />
    * The accuraacy  graph is relativly the same as the tests before. And the main improvement is to test with Batch-Normalisation Layer and leaving the rest of params the same.
    * In the loss graphs there are frequent ups and downs because Vanilla SGD is very twitchy; it reacts instantly to every batch, causing the zig-zag you see.
    * This test is more efficent than the test-1 because in test-1 thhreshold-0.5, no mini batching and no dropuot layer
@@ -272,7 +272,7 @@ Model Overview-
    *  My reasoning for the slight fall is the increase in the complexity of layers and slight increase in recall is due 
    *  The one noticeable thing is that the accuracy graph has converged by 200 epoch this is significant, as it means that when the weights are getting updated for more time, the model is learning the dataset for little longer to get all the intricate details out of it.
    *    <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/55ef72ea-755f-4329-a4a8-8ea926c289c2" />
-   *  <img width="473" height="465" alt="image" src="https://github.com/user-attachments/assets/398b79f3-1e70-48ff-82da-c9911b6bb526" />
+   *  <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/398b79f3-1e70-48ff-82da-c9911b6bb526" />
 
 
    *  After a little research , I have come to a conclustion that increasing more complexity would result in overfitting, but I will 2 seperate tests, in onne I will change the optimizer and theshold, in another I will increase the complexity to check which direction to take.
@@ -292,9 +292,9 @@ Model Overview-
    *  I will use this model as a base to do the last test for neural network
    *  Increasing network complexity may lead to overfitting, but I plan to experiment with more neurons cautiously to see if class 1 precision improves.
    * Given the model converged quickly within 0–100 epochs, a slight increase in learning rate may help explore the loss landscape more efficiently, but large increases could destabilize training.
-   * <img width="1264" height="1358" alt="image" src="https://github.com/user-attachments/assets/20d59438-0dc0-4a20-8b67-d30b0ace7f4e" />
+   * <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/20d59438-0dc0-4a20-8b67-d30b0ace7f4e" />
 
-   * <img width="742" height="662" alt="image" src="https://github.com/user-attachments/assets/fcf119a8-052d-4478-bb86-b6d7e00034fe" />
+   * <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/fcf119a8-052d-4478-bb86-b6d7e00034fe" />
 
 
 * Test-7

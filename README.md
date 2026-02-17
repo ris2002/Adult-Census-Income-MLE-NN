@@ -276,3 +276,22 @@ Model Overview-
 
 
    *  After a little research , I have come to a conclustion that increasing more complexity would result in overfitting, but I will 2 seperate tests, in onne I will change the optimizer and theshold, in another I will increase the complexity to check which direction to take.
+      
+* Test-6
+   * Same hyper params as above except threshold=0.6, optimizer is Adam.
+  
+   * Class 0
+        * Precision: 0.92
+        * Recall:  0.82  
+        * F1-score: 0.87
+   * Class 1
+        * Precision: 0.60
+        * Recall: 0.79 
+        * F1-score: 0.68 
+   *  Overall F1/precision increased slightly compared to previous tests (~6%), but it is still not sufficient to confidently accept the null hypothesis
+   *  I will use this model as a base to do the last test for neural network
+   *  Increasing network complexity may lead to overfitting, but I plan to experiment with more neurons cautiously to see if class 1 precision improves.
+   * Given the model converged quickly within 0–100 epochs, a slight increase in learning rate may help explore the loss landscape more efficiently, but large increases could destabilize training.
+   * <img width="1264" height="1358" alt="image" src="https://github.com/user-attachments/assets/20d59438-0dc0-4a20-8b67-d30b0ace7f4e" />
+
+   * <img width="742" height="662" alt="image" src="https://github.com/user-attachments/assets/fcf119a8-052d-4478-bb86-b6d7e00034fe" />

@@ -270,5 +270,8 @@ Model Overview-
    *  The recall in class 0 has fallen by 5% , the precision in class 1 has fallen by 3%, the recall in class 1 has increased by 5% and the rest remain similar
    *  My reasoning for the slight fall is the increase in the complexity of layers and slight increase in recall is due 
    *  The one noticeable thing is that the accuracy graph has converged by 200 epoch this is significant, as it means that when the weights are getting updated for more time, the model is learning the dataset for little longer to get all the intricate details out of it.
-   *    
+   *    <img width="491" height="458" alt="image" src="https://github.com/user-attachments/assets/55ef72ea-755f-4329-a4a8-8ea926c289c2" />
+   *  <img width="473" height="465" alt="image" src="https://github.com/user-attachments/assets/398b79f3-1e70-48ff-82da-c9911b6bb526" />
+
+
    *  Overall the results dont change one thing for the decrease in recall in class 1 may be attributed to the fact that there is not enough data even SMOTE has taken care of it. My observation is to increase the complexity by increasing the number of neurons  in the  layers so that there would be more neurons to learn the dataset properly

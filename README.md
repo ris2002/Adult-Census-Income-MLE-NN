@@ -180,7 +180,7 @@ Model Overview-
 * Test-1
    * epoch-1000, loss_func-CrossEntropyLoss, Optimizerr-SGD,LR-0.01,Acivation Func-Relu,Neurrons-128+2,2 layers
    * Reason for selecting these values and a shallow NN and no dropout or Batch Normalisation is just to get a baseline to improve accuracy further.
-   * I have taken large neurons at first to serve as a neutral starting point and I felt 32, or 64 would train much as I have around 40816 records after SMOTE.
+   * I think for 40186 SMOTE reocords, 128 is low but not very low like 32 and 64.
    * Class 0
         * Precision: 0.92 → When the model predicts 0, it’s correct 92% of the time (very good).
         * Recall: 0.78 → It correctly finds 78% of all actual 0 cases (decent).
@@ -192,7 +192,7 @@ Model Overview-
    *  I have run the same model, but with a threshold of 0.7 to increase the precision of class 1, but I have ended up with similar results.
    *  With a total f1 score of 75%, it is a good benchmark but if it has come to individual classes it iis not good.
    *  The reason for the good total F1 score might be attributed to the usage of high neons in the hidden layer.
-   *  The observation from the loss curve and the accuracy curve is it is converging at around 200 epochs, which implies that model has stopped learning the patterns so fastlty, maybe with the same epoch little slower LR,optimer ad batch size, we can make the model learn patterns a little more slowly so that it can give a good F1 score for class 1.
+   *  The observation from the loss curve and the accuracy curve is it is converging at around 200 epochs, which implies that model has stopped learning aggressively. With the same epoch, slower LR, optimiser, and batch size, we can make the model learn patterns more slowly so it can achieve a good F1 score for class 1.
    *  
 * Test-2
    * epoch-1000, loss_func-CrossEntropyLoss, Optimizerr-SGD,LR-0.01,Acivation Func-Relu,Neurrons-128+2,2 layers (same as 1st test) included batch size=200, threshold=0.7
@@ -210,12 +210,13 @@ Model Overview-
    *  With a total f1 score of 65.2%, we can see it has decreased, but if you notice class wise there there has been some improvement in the department of precision in class 1 annd recall in class 0.
    *   There has been little decrease in the value of precision in class 0 and a significant decrease in  recall in class 1.  
    *  The reason for the good precision in class 1 and recall in class 0 may be attributed to the batch size  and threshold. Threshold also played a role in crashing the recall value in class 1.
-   *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. This shifted the model’s output probabilities, making it more conservative predicting class 1. As a result, class 1 precision increased, but recall dropped significantly.
+   *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. This may have increased the precision in class 1.
    *  Due to the  threshold at 0.7, what is happening is that the model is selecting probabilities greater than 0.7 this reduces the recall for class     1. The recall for class 0 is 0.98 that implies that the model is 
    * <img width="1366" height="1144" alt="image" src="https://github.com/user-attachments/assets/8c86a81b-94df-4130-9f3e-44012d2bf22e" />
 
    *  <img width="1342" height="1018" alt="image" src="https://github.com/user-attachments/assets/e295f5cd-51da-4893-9601-23ccf400e87f" />
    * From the above pictures, we can see that the accuracy and the loss curves are convering quicklin in the epoch range of 0-100. My intuition is model has somewhat stopped leaning after the curve has stabilised and if  the leranig rate is less and with the adding og dropout and batch normalisation dropping the batch size  there is a posibility of accepting null hypothesis.
+    
 * Test-3
    * epoch-1000, loss_func-CrossEntropyLoss, Optimizerr-SGD,Acivation Func-Relu,Neurrons-128+2,2 layers,batch size=200, threshold=0.7 (same as 1st and 2nd test) included dropout layer(0.25%)and changed LR to LR-0.001
    * Reason for not changing the hyperparameters is that I wanted to test with a dropout layer and reduced LR.

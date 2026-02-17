@@ -210,12 +210,12 @@ Model Overview-
    *  With a total f1 score of 65.2%, we can see it has decreased, but if you notice class wise there there has been some improvement in the department of precision in class 1 annd recall in class 0.
    *   There has been little decrease in the value of precision in class 0 and a significant decrease in  recall in class 1.  
    *  The reason for the good precision in class 1 and recall in class 0 may be attributed to the batch size  and threshold. Threshold also played a role in crashing the recall value in class 1.
-   *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. This means the model  has learned the dataset in more detail than when running the dataset in the single batch, it is only used to converge, scale and generalize it efficiently
+   *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. Mini-batching provides a noisier but computationally efficient approximation of the true gradient, which helps convergence and scalability but does not fundamentally change what the model can learn. It is only used to converge, scale and generalize it efficiently
    *  Due to the  threshold at 0.7, what is happening is that the model is selecting probabilities greater than 0.7 this reduces the recall for class   1. The recall for class 0 is 0.98, which implies that the model can correctly predict the true values of class 0. All the change in behaviour of class 1 is attributed to threshold effect only. 
    * <img width="1366" height="1144" alt="image" src="https://github.com/user-attachments/assets/8c86a81b-94df-4130-9f3e-44012d2bf22e" />
 
    *  <img width="1342" height="1018" alt="image" src="https://github.com/user-attachments/assets/e295f5cd-51da-4893-9601-23ccf400e87f" />
-   * From the above pictures, we can see that the accuracy and the loss curves are convering quicklin in the epoch range of 0-100. My intuition is model has somewhat stopped leaning after the curve has stabilised and if  the leranig rate is less and with the adding og dropout and batch normalisation dropping the batch size  there is a posibility of accepting null hypothesis.
+   * From the above pictures, we can see that the accuracy and the loss curves are convering quicklin in the epoch range of 0-100. My intuition is model has somewhat stopped leaning  aggresivly after the curve has stabilised and if  the leranig rate is less and with the adding og dropout and batch normalisation dropping the batch size  there is a posibility of accepting null hypothesis.
     
 * Test-3
    * epoch-1000, loss_func-CrossEntropyLoss, Optimizerr-SGD,Acivation Func-Relu,Neurrons-128+2,2 layers,batch size=200, threshold=0.7 (same as 1st and 2nd test) included dropout layer(0.25%)and changed LR to LR-0.001

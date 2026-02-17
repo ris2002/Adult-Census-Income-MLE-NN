@@ -295,3 +295,45 @@ Model Overview-
    * <img width="1264" height="1358" alt="image" src="https://github.com/user-attachments/assets/20d59438-0dc0-4a20-8b67-d30b0ace7f4e" />
 
    * <img width="742" height="662" alt="image" src="https://github.com/user-attachments/assets/fcf119a8-052d-4478-bb86-b6d7e00034fe" />
+
+
+* Test-7
+
+* Hyperparameters:
+
+  * Neural Network: 3 hidden layers
+  * Neurons: 75 → 1028 → 512 → 512 → 2
+  * Activation: ReLU
+  * Dropout: 0.5
+  * BatchNorm: Applied after each hidden layer
+  * Optimizer: Adam
+  * Learning Rate: 0.001
+  * Epochs: 1000
+  * Batch size: 200
+  * Threshold: 0.6
+
+* Reason:
+
+  * This test is the final NN experiment.
+  * Aim: Check if increasing complexity, using Adam optimizer, and lowering threshold improves class 1 metrics without overfitting.
+
+* Results:
+
+  | Class | Precision | Recall | F1-score | Support |
+  | ----- | --------- | ------ | -------- | ------- |
+  | 0     | 0.90      | 0.83   | 0.86     | 2246    |
+  | 1     | 0.60      | 0.74   | 0.66     | 1030    |
+
+* Observations:
+
+  * Overall accuracy increased slightly, but class 1 precision is still moderate.
+  * Recall for class 1 improved compared to previous tests, but F1 scores remain imbalanced.
+  * Confusion matrix shows the model still struggles with the minority class despite threshold adjustment and Adam optimizer.
+  * Increasing complexity further may lead to overfitting; additional NN tuning may give diminishing returns.
+
+* Conclusion:
+
+  * This will be the **final NN configuration** for this project.
+  * Null hypothesis — NN performs similarly or better than other ML models with F1 ≥ 70% for both classes — **cannot be fully accepted**, as class 1 F1 remains below target.
+  * These NN results provide a **baseline for comparison** with ensemble methods (Random Forest, AdaBoost, Gradient Boosting, XGBoost).
+

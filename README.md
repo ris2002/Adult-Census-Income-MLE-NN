@@ -210,8 +210,8 @@ Model Overview-
    *  With a total f1 score of 65.2%, we can see it has decreased, but if you notice class wise there there has been some improvement in the department of precision in class 1 annd recall in class 0.
    *   There has been little decrease in the value of precision in class 0 and a significant decrease in  recall in class 1.  
    *  The reason for the good precision in class 1 and recall in class 0 may be attributed to the batch size  and threshold. Threshold also played a role in crashing the recall value in class 1.
-   *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. This may have increased the precision in class 1.
-   *  Due to the  threshold at 0.7, what is happening is that the model is selecting probabilities greater than 0.7 this reduces the recall for class     1. The recall for class 0 is 0.98 that implies that the model is 
+   *  In Test-2, mini-batching (batch size = 200) caused the weights to be updated more frequently with slightly noisier gradients. This means the model  has learned the dataset in more detail than when running the dataset in the single batch, it is only used to converge, scale and generalize it efficiently
+   *  Due to the  threshold at 0.7, what is happening is that the model is selecting probabilities greater than 0.7 this reduces the recall for class   1. The recall for class 0 is 0.98, which implies that the model can correctly predict the true values of class 0. All the change in behaviour of class 1 is attributed to threshold effect only. 
    * <img width="1366" height="1144" alt="image" src="https://github.com/user-attachments/assets/8c86a81b-94df-4130-9f3e-44012d2bf22e" />
 
    *  <img width="1342" height="1018" alt="image" src="https://github.com/user-attachments/assets/e295f5cd-51da-4893-9601-23ccf400e87f" />
@@ -275,4 +275,4 @@ Model Overview-
    *  <img width="473" height="465" alt="image" src="https://github.com/user-attachments/assets/398b79f3-1e70-48ff-82da-c9911b6bb526" />
 
 
-   *  Overall the results dont change one thing for the decrease in recall in class 1 may be attributed to the fact that there is not enough data even SMOTE has taken care of it. My observation is to increase the complexity by increasing the number of neurons  in the  layers so that there would be more neurons to learn the dataset properly
+   *  Overall the results dont change one thing for the decrease in recall in class 1 may be attributed to the fact that there is not enough data even SMOTE has taken care of it. My observation is to try increasing  the complexity by increasing the number of neurons  in the  layers so that there would be more neurons to learn the dataset properly.

@@ -275,4 +275,4 @@ Model Overview-
    *  <img width="473" height="465" alt="image" src="https://github.com/user-attachments/assets/398b79f3-1e70-48ff-82da-c9911b6bb526" />
 
 
-   *  Overall the results dont change one thing for the decrease in recall in class 1 may be attributed to the fact that there is not enough data even SMOTE has taken care of it. My observation is to try increasing  the complexity by increasing the number of neurons  in the  layers so that there would be more neurons to learn the dataset properly.
+   *  After a little research , I have come to a conclustion that increasing more complexity would result in overfitting, but I will 2 seperate tests, in onne I will change the optimizer and theshold, in another I will increase the complexity to check which direction to take.

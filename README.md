@@ -251,3 +251,24 @@ Model Overview-
    *  The results are similar to the previous test, hence I will take this as the baseline layer and build to top of it.
    *  The graphs are similar but in the accuracy curve the graph conludes by 50 epoch, thois might be due to batch norm which stablaised the gradients faster.
    *  For the next test increase the layer test with other optimiers and more decreased LR
+
+
+     
+* Test-5
+   * 3 hidden layers, 1 input layer and 1 output layer. Hidden layer i/ps, (features, neurons)->(75,128),(128,128),(128,128), output layer hyperparams->(128,2), dropout-0.5 for all 3 hidden layers, Relu activation function and SGD (optimizer), LR-0.0001, threshold-0.7
+   * The reason of not yet changing the optimiser is that I have yet to learn Adam amd RMS prop and my mainn is to compare slowly compare this step and understand
+  
+   * Class 0
+        * Precision: 0.94
+        * Recall: 0.75  
+        * F1-score: 0.84
+   * Class 1
+        * Precision: 0.54
+        * Recall: 0.87
+        * F1-score: 0.67 
+   *  The overall results are similar to the previous test with 75.5% of total f1 score but there have been a few differences if checked class-wise.
+   *  The recall in class 0 has fallen by 5% , the precision in class 1 has fallen by 3%, the recall in class 1 has increased by 5% and the rest remain similar
+   *  My reasoning for the slight fall is the increase in the complexity of layers and slight increase in recall is due 
+   *  The one noticeable thing is that the accuracy graph has converged by 200 epoch this is significant, as it means that when the weights are getting updated for more time, the model is learning the dataset for little longer to get all the intricate details out of it.
+   *    
+   *  Overall the results dont change one thing for the decrease in recall in class 1 may be attributed to the fact that there is not enough data even SMOTE has taken care of it. My observation is to increase the complexity by increasing the number of neurons  in the  layers so that there would be more neurons to learn the dataset properly

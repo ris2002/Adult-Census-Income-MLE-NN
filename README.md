@@ -336,4 +336,8 @@ Model Overview-
   * This will be the **final NN configuration** for this project.
   * Null hypothesis — NN performs similarly or better than other ML models with F1 ≥ 70% for both classes — **cannot be fully accepted**, as class 1 F1 remains below target.
   * These NN results provide a **baseline for comparison** with ensemble methods (Random Forest, AdaBoost, Gradient Boosting, XGBoost).
-
+ ##### Hypothesis Selection
+ Rejected
+##### Reasons For Similar results
+* Even after SMOTE, the model cannot fully replace the real minority classes; the model must have learned already what is there to be learnt.
+* Maybe the features of classes 0 and 1 are overlapping so much that the mode cannot distinguish them separately.  

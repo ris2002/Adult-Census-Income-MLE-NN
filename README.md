@@ -336,8 +336,78 @@ Model Overview-
   * This will be the **final NN configuration** for this project.
   * Null hypothesis — NN performs similarly or better than other ML models with F1 ≥ 70% for both classes — **cannot be fully accepted**, as class 1 F1 remains below target.
   * These NN results provide a **baseline for comparison** with ensemble methods (Random Forest, AdaBoost, Gradient Boosting, XGBoost).
- ##### Hypothesis Selection
+ #### Hypothesis Selection
  Rejected
-##### Reasons For Similar results
+#### Reasons For Similar results
 * Even after SMOTE, the model cannot fully replace the real minority classes; the model must have learned already what is there to be learnt.
-* Maybe the features of classes 0 and 1 are overlapping so much that the mode cannot distinguish them separately.  
+* Maybe the features of classes 0 and 1 are overlapping so much that the mode cannot distinguish them separately.
+
+### Random Forest
+* Test 1
+    * This test is a default run with params (n_estimators=100, *, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='sqrt', max_leaf_nodes=None, min_impurity_decrease=0.0, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None, monotonic_cst=None)
+    * This default run predicts where initially the model stands and gives an overall basic idea.
+    *  Results:
+      | Class | Precision | Recall | F1-score | Support |
+      | ----- | --------- | ------ | -------- | ------- |
+      | 0     | 0.87      | 0.89   | 0.88     | 2202    |
+      | 1     | 0.69      | 0.65   | 0.67     | 0815    |
+    * From this default run, we can conclude that, similar to the NN, there is a class bias in the precision section; recall of class 1 is not good, which brings the overall F1 score down to 82%. In a few words to describe it,  the precision and recall for the random forest ML algorithm on this data set is not good.
+  
+### XGBoost
+* Test 1
+    * This test is a default run with params (
+    objective="binary:logistic",
+    use_label_encoder=False,
+    n_estimators=100,
+    learning_rate=0.3,
+    max_depth=6,
+    verbosity=1,
+    booster="gbtree",
+    tree_method="auto",
+    n_jobs=None,
+    gamma=0,
+    min_child_weight=1,
+    max_delta_step=0,
+    subsample=1,
+    colsample_bytree=1,
+    colsample_bylevel=1,
+    colsample_bynode=1,
+    reg_alpha=0,
+    reg_lambda=1,
+    scale_pos_weight=1,
+    base_score=0.5,
+    random_state=0
+)
+    * This default run predicts where initially the model stands and gives an overall basic idea.
+    *  Results:
+      | Class | Precision | Recall | F1-score | Support |
+      | ----- | --------- | ------ | -------- | ------- |
+      | 0     | 0.85      | 0.93   | 0.89     | 2067    |
+      | 1     | 0.81      | 0.63   | 0.73     | 0950    |
+    * From this default run, XGBoost feels like a proper model to start with on this dataset as it gives an overall F1 score of 84% by default and the only problem is that the recall of class1 is not relative to its precision
+
+### Ada Boost
+* Test 1
+    * This test is a default run with params (estimator=None, *, n_estimators=50, learning_rate=1.0, random_state=None)
+    * This default run predicts where initially the model stands and gives an overall basic idea.
+    *  Results:
+     | Class | Precision | Recall | F1-score | Support |
+     | ----- | --------- | ------ | -------- | ------- |
+     | 0     | 0.81      | 0.93   | 0.87     | 1954    |
+     | 1     | 0.83      | 0.60   | 0.69     | 1063    |
+
+    * From this default run, we can conclude that, with an overall F1 score of 81%, it is ok, but the individual F1 scores of its classes and the precision and recall of class1 are not relatively equal
+
+
+### Gradient Boost
+* Test 1
+    * This test is a default run with params (*, loss='log_loss', learning_rate=0.1, n_estimators=100, subsample=1.0, criterion='friedman_mse', min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_depth=3, min_impurity_decrease=0.0, init=None, random_state=None, max_features=None, verbose=0, max_leaf_nodes=None, warm_start=False, validation_fraction=0.1, n_iter_no_change=None, tol=0.0001, ccp_alpha=0.0)
+    * This default run predicts where initially the model stands and gives an overall basic idea.
+    *  Results:
+      | Class | Precision | Recall | F1-score | Support |
+      | ----- | --------- | ------ | -------- | ------- |
+      | 0     | 0.83      | 0.93   | 0.88     | 1985    |
+      | 1     | 0.83      | 0.62   | 0.71     | 1032    |
+
+    * From this default run, we can conclude that, wiith an overall F1 score of 82%, it is ok, but the individual F1 scores of its classes and the precision and recall of class1 are not relatively equal, bt better than ADABoost model
+

@@ -389,7 +389,8 @@ Model Overview-
             * Recall: 0.61
             * F1-score: 0.70
       Conclusion- Much better result compared to the first 2. As observed the precision of class 1 has increased dramatically and it has qualified for the null hypothesis. One last will be done to increase the recall in class 1.
-  
+#### Null Hypothesis 
+* The null hypothesis is accepted  
 ### XGBoost
 * Test 1
     * This test is a default run with params (
@@ -429,7 +430,8 @@ Model Overview-
        * Support: 0950  
 
     * From this default run, XGBoost feels like a proper model to start with on this dataset as it gives an overall F1 score of 84% by default and the only problem is that the recall of class1 is not relative to its precision
-
+#### Null Hypothesis 
+* The null hypothesis is accepted
 ### Ada Boost
 * Test 1
     * This test is a default run with params (estimator=None, *, n_estimators=50, learning_rate=1.0, random_state=None)
@@ -447,6 +449,21 @@ Model Overview-
        * Support: 1063  
 
     * From this default run, we can conclude that, with an overall F1 score of 81%, it is ok, but the individual F1 scores of its classes and the precision and recall of class1 are not relatively equal
+ * Test 2
+     * 'n_estimators':100
+     * I tried to see what happens if the n_estimators were to be  double.
+     * Class 0  
+       * Precision: 0.83
+       * Recall: 0.93  
+       * F1-score: 0.88  
+    * Class 1  
+       * Precision: 0.832 
+       * Recall: 0.62  
+       * F1-score: 0.71
+    *  CONCLUSION- The recall for class 1 has slightly increased
+#### Null Hypothesis 
+* The null hypothesis is accepted
+   
 
 
 ### Gradient Boost
@@ -466,5 +483,5 @@ Model Overview-
         * Support: 1032  
 
 
-    * From this default run, we can conclude that, wiith an overall F1 score of 82%, it is ok, but the individual F1 scores of its classes and the precision and recall of class1 are not relatively equal, bt better than ADABoost model
-
+#### Null Hypothesis 
+* The null hypothesis is accepted

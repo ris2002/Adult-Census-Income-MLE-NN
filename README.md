@@ -317,12 +317,18 @@ Model Overview-
   * This test is the final NN experiment.
   * Aim: Check if increasing complexity, using Adam optimizer, and lowering threshold improves class 1 metrics without overfitting.
 
-* Results:
+* Class 0  
+    * Precision: 0.90  
+    * Recall: 0.83  
+    * F1-score: 0.86  
+    * Support: 2246  
 
-  | Class | Precision | Recall | F1-score | Support |
-  | ----- | --------- | ------ | -------- | ------- |
-  | 0     | 0.90      | 0.83   | 0.86     | 2246    |
-  | 1     | 0.60      | 0.74   | 0.66     | 1030    |
+* Class 1  
+    * Precision: 0.60  
+    * Recall: 0.74  
+    * F1-score: 0.66  
+    * Support: 1030  
+
 
 * Observations:
 
@@ -346,12 +352,43 @@ Model Overview-
 * Test 1
     * This test is a default run with params (n_estimators=100, *, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='sqrt', max_leaf_nodes=None, min_impurity_decrease=0.0, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None, monotonic_cst=None)
     * This default run predicts where initially the model stands and gives an overall basic idea.
-    *  Results:
-      | Class | Precision | Recall | F1-score | Support |
-      | ----- | --------- | ------ | -------- | ------- |
-      | 0     | 0.87      | 0.89   | 0.88     | 2202    |
-      | 1     | 0.69      | 0.65   | 0.67     | 0815    |
+    * Class 0  
+       * Precision: 0.87  
+       * Recall: 0.89  
+       * F1-score: 0.88  
+       * Support: 2202  
+
+    * Class 1  
+       * Precision: 0.69  
+       * Recall: 0.65  
+       * F1-score: 0.67  
+       * Support: 0815  
+
     * From this default run, we can conclude that, similar to the NN, there is a class bias in the precision section; recall of class 1 is not good, which brings the overall F1 score down to 82%. In a few words to describe it,  the precision and recall for the random forest ML algorithm on this data set is not good.
+  * Test 2
+      * Tried with 'n_estimators':300,'max_depth':10.
+      * n_estimators basically means the no. of DT. The thinking behind was increasing the number of DT might balence both classes.
+      * max_depth param means the split cannot occur infinitely; it stops after splitting 'max_depth' times
+      * Class 0
+            * Precision: 0.76
+            * Recall:  0.94  
+            * F1-score:  0.84
+        * Class 1
+            * Precision: 0.86
+            * Recall: 0.56
+            * F1-score: 0.68
+      Conclusion- there has been an increase in  FP val in class 0, and the recall of class 1has fallen. My understanding is DT is inherently highly varient by design so I think it is better to reduce the no. of estimators. But after testing that theory(reduced n_estmators to default), and getting similar results,  I think the max_depth must be increased.
+* Test 3
+    * Tried with 'n_estimators':300,'max_depth':20.
+      * Class 0
+            * Precision: 0.82
+            * Recall:  0.93  
+            * F1-score:  0.87 
+        * Class 1
+            * Precision: 0.81
+            * Recall: 0.61
+            * F1-score: 0.70
+      Conclusion- Much better result compared to the first 2. As observed the precision of class 1 has increased dramatically and it has qualified for the null hypothesis. One last will be done to increase the recall in class 1.
   
 ### XGBoost
 * Test 1
@@ -379,22 +416,35 @@ Model Overview-
     random_state=0
 )
     * This default run predicts where initially the model stands and gives an overall basic idea.
-    *  Results:
-      | Class | Precision | Recall | F1-score | Support |
-      | ----- | --------- | ------ | -------- | ------- |
-      | 0     | 0.85      | 0.93   | 0.89     | 2067    |
-      | 1     | 0.81      | 0.63   | 0.73     | 0950    |
+    * Class 0  
+       * Precision: 0.85  
+       * Recall: 0.93  
+       * F1-score: 0.89  
+       * Support: 2067  
+
+    * Class 1  
+       * Precision: 0.81  
+       * Recall: 0.63  
+       * F1-score: 0.73  
+       * Support: 0950  
+
     * From this default run, XGBoost feels like a proper model to start with on this dataset as it gives an overall F1 score of 84% by default and the only problem is that the recall of class1 is not relative to its precision
 
 ### Ada Boost
 * Test 1
     * This test is a default run with params (estimator=None, *, n_estimators=50, learning_rate=1.0, random_state=None)
     * This default run predicts where initially the model stands and gives an overall basic idea.
-    *  Results:
-     | Class | Precision | Recall | F1-score | Support |
-     | ----- | --------- | ------ | -------- | ------- |
-     | 0     | 0.81      | 0.93   | 0.87     | 1954    |
-     | 1     | 0.83      | 0.60   | 0.69     | 1063    |
+    * Class 0  
+       * Precision: 0.81  
+       * Recall: 0.93  
+       * F1-score: 0.87  
+       * Support: 1954  
+
+    * Class 1  
+       * Precision: 0.83  
+       * Recall: 0.60  
+       * F1-score: 0.69  
+       * Support: 1063  
 
     * From this default run, we can conclude that, with an overall F1 score of 81%, it is ok, but the individual F1 scores of its classes and the precision and recall of class1 are not relatively equal
 
@@ -403,11 +453,18 @@ Model Overview-
 * Test 1
     * This test is a default run with params (*, loss='log_loss', learning_rate=0.1, n_estimators=100, subsample=1.0, criterion='friedman_mse', min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_depth=3, min_impurity_decrease=0.0, init=None, random_state=None, max_features=None, verbose=0, max_leaf_nodes=None, warm_start=False, validation_fraction=0.1, n_iter_no_change=None, tol=0.0001, ccp_alpha=0.0)
     * This default run predicts where initially the model stands and gives an overall basic idea.
-    *  Results:
-      | Class | Precision | Recall | F1-score | Support |
-      | ----- | --------- | ------ | -------- | ------- |
-      | 0     | 0.83      | 0.93   | 0.88     | 1985    |
-      | 1     | 0.83      | 0.62   | 0.71     | 1032    |
+    * Class 0  
+        * Precision: 0.83  
+        * Recall: 0.93  
+        * F1-score: 0.88  
+        * Support: 1985  
+
+    * Class 1  
+        * Precision: 0.83  
+        * Recall: 0.62  
+        * F1-score: 0.71  
+        * Support: 1032  
+
 
     * From this default run, we can conclude that, wiith an overall F1 score of 82%, it is ok, but the individual F1 scores of its classes and the precision and recall of class1 are not relatively equal, bt better than ADABoost model
 

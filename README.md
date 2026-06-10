@@ -484,21 +484,140 @@ Model Overview-
 
 
 
+# Corrected Runs — sections to insert into the README
+
+Paste each block at the END of the corresponding model's hyperparameter-runs section.
+All corrected runs share the same pipeline fixes, stated once in the preamble below —
+put the preamble just before the Random Forest section (or at the top of
+"Model Hyperparameters tuning").
+
+---
+
+## PREAMBLE (insert once, before the per-model runs)
+
+### Corrected Evaluation (Post-Review Re-Run)
+
+All models were re-evaluated after fixing several pipeline bugs found during a
+post-project review (see "Mistakes Found & Fixed"). The corrected pipeline:
+
+- `classification_report(y_true, y_pred)` argument order fixed for all ensemble models
+  (previously swapped — per-class precision and recall columns were inverted)
+- Single shared train/test split (random_state=6, test_size=0.1) — every model now
+  evaluated on the identical held-out test set (support: 2246 / 771, total 3017)
+- `education` string column dropped (redundant with `education.num`; the default
+  OrdinalEncoder had been assigning a meaningless alphabetical order)
+- `occupation` moved to One-Hot Encoding (no defensible ordinal structure)
+- `remainder='passthrough'` added to the ColumnTransformer — the engineered
+  `has_capital_gain` / `has_capital_loss` indicators were previously being silently
+  dropped (default `remainder='drop'`) and are now included; feature count 75 → 89
+
+**Key finding:** with the report columns corrected, the per-class story inverted.
+The models' weakness is class 1 *precision* (0.62–0.65 — they over-predict >50K),
+not class 1 recall (0.82–0.83, which is good). The original README's observations
+about "poor class 1 recall" were artifacts of the swapped columns.
+
+**Known remaining limitations (acknowledged, not yet re-run):** the split is not
+stratified, and SMOTENC's categorical list did not include the two binary indicator
+columns (synthetic rows may contain fractional indicator values). Both are noted
+for a future pass.
+
+---
+
+## RANDOM FOREST — insert after Test 3
+
+### Corrected Run (n_estimators=300, max_depth=20)
+
+Same hyperparameters as Test 3, re-run on the corrected pipeline.
+
+- Class 0 — Precision: 0.93 | Recall: 0.83 | F1: 0.88 | Support: 2246
+- Class 1 — Precision: 0.63 | Recall: 0.82 | F1: 0.71 | Support: 771
+- Accuracy: 0.83 | Macro F1: 0.79
+
+**Observation:** with corrected columns, class 1 recall (0.82) is strong and class 1
+precision (0.63) is the weak point — the opposite of the original Test 3 reading.
+The restored binary capital-gain/loss features and the corrected encoding likely
+contribute to the improved class 1 recall.
+
+**Success criterion (F1 ≥ 0.70 per class): MET** (0.88 / 0.71).
+
+---
+
+## XGBOOST — insert after Test 1
+
+### Corrected Run (default parameters)
+
+- Class 0 — Precision: 0.93 | Recall: 0.85 | F1: 0.89 | Support: 2246
+- Class 1 — Precision: 0.65 | Recall: 0.82 | F1: 0.73 | Support: 771
+- Accuracy: 0.84 | Macro F1: 0.81
+
+**Observation:** strongest model overall. Class 1 recall 0.82 with default
+parameters; precision 0.65 is the limiting factor. Best per-class balance of the
+four ensembles.
+
+**Success criterion (F1 ≥ 0.70 per class): MET** (0.89 / 0.73).
+
+---
+
+## ADABOOST — insert after Test 2
+
+### Corrected Run (n_estimators=100)
+
+- Class 0 — Precision: 0.93 | Recall: 0.82 | F1: 0.87 | Support: 2246
+- Class 1 — Precision: 0.62 | Recall: 0.83 | F1: 0.71 | Support: 771
+- Accuracy: 0.82 | Macro F1: 0.79
+
+**Observation:** highest class 1 recall of the four (0.83) at the lowest class 1
+precision (0.62) — the most "eager" model on the positive class.
+
+**Success criterion (F1 ≥ 0.70 per class): MET** (0.87 / 0.71).
+
+---
+
+## GRADIENT BOOST — insert after Test 1
+
+### Corrected Run (default parameters)
+
+- Class 0 — Precision: 0.94 | Recall: 0.84 | F1: 0.88 | Support: 2246
+- Class 1 — Precision: 0.64 | Recall: 0.83 | F1: 0.72 | Support: 771
+- Accuracy: 0.84 | Macro F1: 0.80
+
+**Observation:** effectively tied with XGBoost; marginally lower class 1 F1.
+Consistent with XGBoost being a regularised variant of the same mechanism.
+
+**Success criterion (F1 ≥ 0.70 per class): MET** (0.88 / 0.72).
+
+---
+
+## NEURAL NETWORK — 
+
 ### Corrected Run (Test-7 architecture, input_dim=89) — PENDING
+
 Architecture re-trained on the corrected 89-feature pipeline
 (89 → 1028 → 512 → 512 → 2, BatchNorm + Dropout 0.5, Adam, LR 0.001,
 batch 200, 1000 epochs). Final training accuracy ~0.894 (epoch 900, monitored
 at threshold 0.65 in train mode — see limitations).
 
-Test evaluation at threshold 0.5: [FILL AFTER RUNNING test_model(..., threshold=0.5)]
-Test evaluation at threshold 0.65: [FILL AFTER RUNNING test_model(..., threshold=0.65)]
+- Test evaluation at threshold 0.5: **[FILL AFTER RUNNING test_model(..., threshold=0.5)]**
+- Test evaluation at threshold 0.65: **[FILL AFTER RUNNING test_model(..., threshold=0.65)]**
 
-Success criterion (F1 ≥ 0.70 per class): [FILL]
+**Success criterion (F1 ≥ 0.70 per class): [FILL]**
 
-SUMMARY TABLE — optional, insert after all model sections
-Corrected Results Summary (identical test set: 2246 / 771)
-ModelParamsC0 F1C1 PC1 RC1 F1AccF1 ≥ 0.70/classXGBoostdefault0.890.650.820.730.84METGradient Boostdefault0.880.640.830.720.84METRandom Forestn=300, depth=200.880.630.820.710.83METAdaBoostn=1000.870.620.830.710.82METNeural NetworkTest-7 arch, d=89TBDTBDTBDTBDTBDTBD
+---
+
+## SUMMARY TABLE — optional, insert after all model sections
+
+### Corrected Results Summary (identical test set: 2246 / 771)
+
+| Model            | Params              | C0 F1 | C1 P  | C1 R  | C1 F1 | Acc  | F1 ≥ 0.70/class |
+|------------------|---------------------|-------|-------|-------|-------|------|-----------------|
+| XGBoost          | default             | 0.89  | 0.65  | 0.82  | 0.73  | 0.84 | MET             |
+| Gradient Boost   | default             | 0.88  | 0.64  | 0.83  | 0.72  | 0.84 | MET             |
+| Random Forest    | n=300, depth=20     | 0.88  | 0.63  | 0.82  | 0.71  | 0.83 | MET             |
+| AdaBoost         | n=100               | 0.87  | 0.62  | 0.83  | 0.71  | 0.82 | MET             |
+| Neural Network   | Test-7 arch, d=89   | TBD   | TBD   | TBD   | TBD   | TBD  | TBD             |
+
 All four ensemble models meet the per-class F1 ≥ 0.70 criterion on the corrected
 pipeline. The shared weakness is class 1 precision (0.62–0.65): the models
 over-predict the >50K class. Possible next steps: threshold sweep per model,
 probability calibration, or cost-sensitive training.
+

@@ -483,5 +483,22 @@ Model Overview-
         * Support: 1032  
 
 
-#### Null Hypothesis 
-* The null hypothesis is accepted
+
+### Corrected Run (Test-7 architecture, input_dim=89) — PENDING
+Architecture re-trained on the corrected 89-feature pipeline
+(89 → 1028 → 512 → 512 → 2, BatchNorm + Dropout 0.5, Adam, LR 0.001,
+batch 200, 1000 epochs). Final training accuracy ~0.894 (epoch 900, monitored
+at threshold 0.65 in train mode — see limitations).
+
+Test evaluation at threshold 0.5: [FILL AFTER RUNNING test_model(..., threshold=0.5)]
+Test evaluation at threshold 0.65: [FILL AFTER RUNNING test_model(..., threshold=0.65)]
+
+Success criterion (F1 ≥ 0.70 per class): [FILL]
+
+SUMMARY TABLE — optional, insert after all model sections
+Corrected Results Summary (identical test set: 2246 / 771)
+ModelParamsC0 F1C1 PC1 RC1 F1AccF1 ≥ 0.70/classXGBoostdefault0.890.650.820.730.84METGradient Boostdefault0.880.640.830.720.84METRandom Forestn=300, depth=200.880.630.820.710.83METAdaBoostn=1000.870.620.830.710.82METNeural NetworkTest-7 arch, d=89TBDTBDTBDTBDTBDTBD
+All four ensemble models meet the per-class F1 ≥ 0.70 criterion on the corrected
+pipeline. The shared weakness is class 1 precision (0.62–0.65): the models
+over-predict the >50K class. Possible next steps: threshold sweep per model,
+probability calibration, or cost-sensitive training.

@@ -614,7 +614,7 @@ at threshold 0.65 in train mode — see limitations).
 | Gradient Boost   | default             | 0.88  | 0.64  | 0.83  | 0.72  | 0.84 | MET             |
 | Random Forest    | n=300, depth=20     | 0.88  | 0.63  | 0.82  | 0.71  | 0.83 | MET             |
 | AdaBoost         | n=100               | 0.87  | 0.62  | 0.83  | 0.71  | 0.82 | MET             |
-| Neural Network   | Test-7 arch, d=89   | TBD   | TBD   | TBD   | TBD   | TBD  | TBD             |
+| Neural Network   | Test-7 arch, d=89   | 0.66   | 0.69  | TBD   | 0.68  | 0.83  | NOT MET            |
 
 All four ensemble models meet the per-class F1 ≥ 0.70 criterion on the corrected
 pipeline. The shared weakness is class 1 precision (0.62–0.65): the models
